@@ -1,16 +1,23 @@
+const User = require("../models/userModel");
 
 exports.getUserController = (req, res) => {
     res.send("Users page");
 };
 
-exports.postUserController = (req, res) => {
-    const { firstName, email} = req.body;
+exports.userSignUp = async (req, res) => {
+    const {firstName, email, lastName, imageUrl, role} = req.body;
     const hashedPassword = req.hashedPassword;
-    res.json({
-        firstName,
-        email,
-        hashedPassword,
-        _id: "randomId4567",
-        });
 
+    const newUser = new User({
+        firstName, 
+        lastName,
+        email, 
+        password: hashedPassword,
+        imageUrl, 
+        role,
+        inventory: []
+    });
+    
+    const savedUser = await newUser.save();
+    res.status(201).json({firstName: savedUser.firstName, email: savedUser.email, role: savedUser.role});
 };
