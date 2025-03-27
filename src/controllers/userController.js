@@ -10,12 +10,12 @@ require("dotenv").config();
 exports.userLogin = async (req, res) => {
     const {email, password} = req.body;
     try {
-        const foundUser = await User.findOne({ email })
+        const foundUser = await User.findOne({ email });
         if (!foundUser) {
             throw new Error("Invalid credentials");
 
         };
-        const passwordMatch = await bcrypt.compare(password, foundUser.password)
+        const passwordMatch = await bcrypt.compare(password, foundUser.password);
         if (!passwordMatch) {
             throw new Error("Invalid credentials");
         };
@@ -26,9 +26,9 @@ exports.userLogin = async (req, res) => {
             },
             process.env.SECRET_TOKEN_KEY,
             { expiresIn: "24h"}
-        )
+        );
         
-        res.status(200).json(token)
+        res.status(200).json(token);
 
     } catch (err){
         res.status(401).json({
