@@ -3,10 +3,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-// exports.getUserController = (req, res) => {
-//     res.send("Users page");
-// };
-
 exports.userLogin = async (req, res) => {
     const {email, password} = req.body;
     try {
