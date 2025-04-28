@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
-const port = 3000;
 const userRoutes = require("./routes/users");
 const productRoutes = require("./routes/products");
 const invoiceRoutes = require("./routes/invoices");
 const connectDB = require("./utils/db");
 const path = require("path");
+const port = process.env.PORT || 3000;
 
 connectDB();
 
